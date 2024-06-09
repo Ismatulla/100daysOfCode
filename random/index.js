@@ -1,12 +1,17 @@
-const express = require('express')
-const app = express()
+// working with template engines (setting view directory ,view,path ,ejs interpolation ,passing data in ejs
+const express = require('express');
+const path = require('path')
+const app = express();
+
+app.set('view engine', 'ejs')
+app.set('views', path.join(__dirname, '/views'))
+
 app.get('/', (req, res) => {
-  res.send('welcome to shelter😀')
+  res.render('home.ejs')
 })
-app.get('/cats', (req, res) => {
-  res.send('meow 🙀')
+app.get('/random', (req, res) => {
+  const rand = Math.floor(Math.random() * 10) + 1
+  res.render('random', { rand })
 })
-app.get('/dogs', (req, res) => {
-  res.send('woof🐶')
-})
-app.listen('8080', () => console.log('server running on port 8080'))
+
+app.listen('8080', () => console.log('running on port 8080'))
