@@ -7,15 +7,17 @@
 // console.log(greeting('John'))
 
 // ES-6 import export
-import { allPosts } from "./postController.js";
-console.log(allPosts())
+// import { allPosts } from "./postController.js";
+// console.log(allPosts())
 
 // creating http server in pure nodejs (server that handles http )
 import http from 'http'
 const PORT = 3000
 const server = http.createServer((req, res) => {
-  res.write('Hello world')
-  res.end()
+  // res.write('Hello worldf')
+  // res.end()
+  console.log(req.url)
+  console.log(req.method)
 })
 server.listen(PORT, () => {
   console.log(`server running on port ${PORT}`)
