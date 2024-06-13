@@ -32,17 +32,16 @@ app.post('/createForm', (req, res) => {
   riddle.push({ id: uuidv4(), username, post, detail })
   res.redirect('/')
 })
-app.get('/updateForm/:id', (req, res) => {
+app.get('/updateForm/:id/edit', (req, res) => {
   const { id } = req.params
   const singleData = riddle.find((data) => data.id == id)
   res.render('updateForm', { singleData })
 })
 
-app.patch('/updateForm/:id', (req, res) => {
+app.patch('/updateForm/:id/edit', (req, res) => {
   const { username, post, detail } = req.body
   const { id } = req.params
   const findSingleData = riddle.find((data) => data.id == id)
-  console.log(findSingleData)
   findSingleData.username = username,
     findSingleData.post = post,
     findSingleData.detail = detail
