@@ -33,7 +33,6 @@ app.post('/comments', (req, res) => {
 
 app.get('/comments/:id', (req, res) => {
   const { id } = req.params
-  console.log(id)
   const comment = comments.find((cmt) => cmt.id == id)
   res.render('comments/singleComment', { comment })
 })
@@ -44,8 +43,6 @@ app.patch('/comments/:id', (req, res) => {
   const foundComment = comments.find((cmt) => cmt.id == id)
   foundComment.text = newCommentText
   console.log(id)
-  console.log(req.body)
-  console.log(foundComment)
   res.redirect('/comments')
 })
-app.listen('8080', () => console.log('running on port 8080'))  
+app.listen('8081', () => console.log('running on port 8081'))  
