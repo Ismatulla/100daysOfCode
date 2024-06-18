@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>Campground detail:</h1>
+  <h5>
+    <%= campDetail.title %>
+  </h5>
+  <p>
+    <%= campDetail.location %>
+  </p>
+  <form action="/campgrounds/<%=campDetail._id%>?_method=DELETE" method="POST">
+    <button type="submit">Delete item</button>
+  </form>
+</body>
+
+</html>

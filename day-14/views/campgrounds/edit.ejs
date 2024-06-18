@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <%= JSON.stringify(campDetail) %>
+    <h1>Edit this campground:</h1>
+    <a href="/campgrounds/<%=campDetail._id %>">Cancel</a> <br> <br>
+
+    <form action="/campgrounds/<%=campDetail._id %>?_method=PUT" method="POST">
+      <label for="title" name="title" id="title">Title:</label>
+      <input type="text" placeholder="title" id="title" name="campground[title]" value="<%=campDetail.title%>">
+
+      <label for="location" name="location" id="location">Location:</label>
+      <input type="text" placeholder="location" id="location" name="campground[location]"
+        value="<%=campDetail.location%>">
+      <button type="submit">Edit</button>
+    </form>
+</body>
+
+</html>
