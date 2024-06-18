@@ -1,4 +1,4 @@
-// working with mongoose ,inserting infos,saving infos and connecting mongoose to db and manipulating db with nodejs terminal that is connected to db through mongoose 
+// working with mongoose ,inserting infos,saving infos and connecting mongoose to db and manipulating db with nodejs terminal that is connected to db through 
 const mongoose = require('mongoose')
 
 mongoose.connect('mongodb://127.0.0.1:27017/movieDB').then(() => {
