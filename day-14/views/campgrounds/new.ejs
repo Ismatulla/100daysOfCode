@@ -1,23 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
+<% layout('layouts/boilerplate') %>
+  <div class="row">
+    <h1 class="text-center">New Campground</h1>
+    <div class="col-6 offset-3">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
+      <form action="/campgrounds" method="POST" novalidate class="needs-validation">
+        <div class="mb-3">
+          <label for="title" id="title" class="form-label">Title:</label>
+          <input required class="form-control" type="text" placeholder="title" id="title" name="campground[title]"
+            id="validationCustom01">
+          <div class=" valid-feedback">Valid title!
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="location" id="location" class="form-label">Location:</label>
+          <input required class="form-control" type="text" placeholder="location" id="location"
+            name="campground[location]" id="validationCustom02">
+          <div class="valid-feedback">Valid location!</div>
+        </div>
+        <div class="mb-3">
+          <label for="image" id="image" class="form-label">Image Url:</label>
+          <input required class="form-control" type="text" placeholder="img url" id="image" name="campground[image]"
+            id="validationCustom03">
+          <div class="valid-feedback">Valid Image!</div>
+        </div>
 
-<body>
-  <h1>Create new campground:</h1>
-  <a href="/campgrounds">All campgrounds</a> <br> <br>
-  <form action="/campgrounds" method="POST">
-    <label for="title" name="title" id="title">Title:</label>
-    <input type="text" placeholder="title" id="title" name="campground[title]">
+        <div class="mb-3">
+          <label for="price" class="form-label">Campground Price</label>
+          <div class="input-group">
+            <span class="input-group-text" id="price-label">$</span>
+            <input required type="text" class="form-control" id="price" placeholder="0.0" aria-label="price-label"
+              aria-describedby="price-label" name="campground[price]" id="validationCustom04">
+            <div class="valid-feedback">Valid price!</div>
+          </div>
+        </div>
+        <div class=" mb-3">
+          <label for="description" id="description" class="form-label">Description</label>
+          <textarea required class="form-control" type="text" placeholder="description" id="description"
+            name="campground[description]" id="validationCustom05"></textarea>
+          <div class="valid-feedback">Valid description!</div>
+        </div>
+        <div class="mb-3">
+          <button type="submit" class="btn btn-success">Add Campground</button>
+        </div>
+      </form>
+      <a href="/campgrounds">All campgrounds</a>
+    </div>
+  </div>
+  <script>
+    (() => {
+      'use strict'
 
-    <label for="location" name="location" id="location">Location:</label>
-    <input type="text" placeholder="location" id="location" name="campground[location]">
-    <button type="submit">create</button>
-  </form>
-</body>
+      const forms = document.querySelectorAll('.needs-validation')
 
-</html>
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+    })()
+  </script>

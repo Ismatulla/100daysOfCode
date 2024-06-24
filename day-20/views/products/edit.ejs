@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <form action="/products/<%=product._id%>?_method=PUT" method="POST">
+    <label for="name"> product name:</label>
+    <input type="text" placeholder="product name" name="name" id='name' value="<%=product.name%>">
+    <label for="price"> product price:</label>
+    <input type="number" placeholder="enter price" name='price' id='price' value="<%=product.price%>">
+    <label for="category"> product catgory:</label>
+    <select name="category" id="category">
+      <option value="vegetable">vegetable</option>
+      <option value="fruit">fruit</option>
+    </select>
+    <button type="submit">submit</button>
+  </form>
+  <a href="/products/<%=product._id%>">Cancel</a>
+</body>
+
+</html>
