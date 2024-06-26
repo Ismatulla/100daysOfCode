@@ -8,15 +8,18 @@
 </head>
 
 <body>
-  <form action="/products" method="POST">
+  <form action="/farms/<%=id%>/products" method="POST">
     <label for="name"> product name:</label>
     <input type="text" placeholder="product name" name="name" id='name'>
     <label for="price"> product price:</label>
     <input type="number" placeholder="enter price" name='price' id='price'>
     <label for="category"> product catgory:</label>
     <select name="category" id="category">
-      <option value="vegetable">vegetable</option>
-      <option value="fruit">fruit</option>
+      <% for(let category of categories) {%>
+        <option value="<%=category%>">
+          <%=category%>
+        </option>
+        <% } %>
     </select>
     <button type="submit">submit</button>
   </form>

@@ -22,8 +22,18 @@
 
     </li>
   </ul>
-  <a href="/products">main page</a>
+  <h2>Product name</h2>
+
+  <ul>
+    <% for(let product of farm.products) { %>
+      <li>
+        <%=product.name%>-<%=product.category%>
+      </li>
+      <% } %>
+  </ul>
+  <a href="/farms">main page</a>
   <a href="/farms/<%=farm._id%>/edit">edit</a>
+  <a href="/farms/<%=farm._id %>/products/new">add product</a>
   <form action="/products/<%=farm._id%>?_method=DELETE" method="POST">
     <button>delete</button>
   </form>

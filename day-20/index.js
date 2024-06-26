@@ -37,8 +37,10 @@ app.post('/farms', async (req, res) => {
 })
 
 app.get('/farms/:id', async (req, res) => {
-  const farm = await Farm.findById(req.params.id);
+  const farm = await Farm.findById(req.params.id).populate('products');
+  console.log(farm)
   res.render('farms/show', { farm })
+  // res.send(farm.products)
 })
 // product routing 
 const categories = ['fruit', 'vegetable', 'diary']
@@ -66,21 +68,40 @@ app.get('/products/:id', async (req, res) => {
   const product = await Product.findById(id)
   res.render('products/show', { product })
 })
-app.get('/product/:id/edit', async (req, res) => {
+app.get('/products/:id/edit', async (req, res) => {
   const { id } = req.params;
   const product = await Product.findById(id);
-  res.render('product/edit', { product, categories })
+  res.render('products/edit', { product, categories })
 })
-app.put('/product/:id', async (req, res) => {
+app.put('/products/:id', async (req, res) => {
   const { id } = req.params;
   const product = await Product.findByIdAndUpdate(id, req.body, { runValidators: true, new: true });
-  res.redirect(`product/${product._id}`)
+  res.redirect(`/products/${product._id}`)
 })
-app.delete('/product/:id', async (req, res) => {
+app.delete('/products/:id', async (req, res) => {
   const { id } = req.params;
-  const product = await Product.findByIdAndDelete(id);
-  res.redirect(`products`)
+  await Product.findByIdAndDelete(id);
+  res.redirect('/products')
 })
+
+// creating products for farms
+app.get('/farms/:id/products/new', (req, res) => {
+  const { id } = req.params
+  res.render('products/new', { id, categories })
+})
+
+app.post('/farms/:id/products', async (req, res) => {
+  const { id } = req.params
+  const farm = await Farm.findById(id)
+  const { name, price, category } = req.body;
+  const product = new Product({ name, price, category })
+  farm.products.push(product);
+  product.farm = farm
+  await farm.save()
+  await product.save();
+  res.redirect(`/farms/${id}`)
+})
+
 app.listen('8080', () => {
   console.log('running on port 8080 🙄')
 })
