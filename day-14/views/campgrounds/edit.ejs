@@ -3,7 +3,7 @@
     <h1 class="text-center">Edit Campground</h1>
     <div class="col-6 offset-3">
 
-      <form action="/campgrounds/<%=campDetail._id %>?_method=PUT" method="POST" class="needs-validation" novalidate>
+      <form action="/campgrounds/<%=campDetail._id %>?_method=PUT" method="POST"novalidate class="needs-validation">
         <div class="mb-3">
           <label for="title" id="title" class="form-label">Title:</label>
           <input required class="form-control" type="text" placeholder="title" id="title" name="campground[title]"
@@ -53,21 +53,4 @@
     </div>
   </div>
 
-  <script>
-    (() => {
-      'use strict'
-
-      const forms = document.querySelectorAll('.needs-validation')
-
-      Array.from(forms).forEach(form => {
-        form.addEventListener('submit', event => {
-          if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-          }
-
-          form.classList.add('was-validated')
-        }, false)
-      })
-    })()
-  </script>
+  
