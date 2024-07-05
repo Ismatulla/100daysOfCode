@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 const session = require('express-session');
 const express = require('express');
 const flash = require('connect-flash')
@@ -82,3 +86,8 @@ app.use((err, req, res, next) => {
 app.listen('8080', () => {
   console.log('running on port 8080 🙄');
 });
+// npm install cloudinary@1.41.3
+
+// npm install multer-storage-cloudinary@4.0.0
+
+// npm install multer@1.4.5-lts.1
