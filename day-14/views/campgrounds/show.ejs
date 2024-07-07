@@ -2,6 +2,7 @@
   <link rel="stylesheet" href="/stylesheets/stars.css">
   <div class="row">
     <div class="col-6 ">
+
       <div class="card mb-3">
         <img src="<%= campDetail.image.url%>" class="card-img-top" alt="not found">
         <div class="card-body">
@@ -87,5 +88,11 @@
             </div>
             <% } %>
     </div>
-
+    <div id="map" style="width: 400px; height: 300px;"></div>
   </div>
+  <script>
+  
+    const maptilerApiKey = '<%- process.env.MAPTILER_API_KEY %>';
+    const campground = <%- JSON.stringify(campDetail) %>
+  </script>
+  <script src="/showPageMap.js"></script>

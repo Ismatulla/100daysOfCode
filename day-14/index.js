@@ -1,6 +1,8 @@
+const mongoSanitize = require('express-mongo-sanitize')
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
+
 
 const session = require('express-session');
 const express = require('express');
@@ -17,18 +19,34 @@ const userRoutes = require('./routs/users')
 const campgroundRoutes = require('./routs/campground');
 const reviewsRoutes = require('./routs/reviews');
 
+const { MongoStore } = require('connect-mongo')
+const MongoDBStore = require('connect-mongo')(session)
+
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const User = require('./models/user')
-
-mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp')
+// 'mongodb://127.0.0.1:27017/yelp-camp'
+const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/yelp-camp'
+const secret = process.env.SECRET || "thisshouldberealsecret"
+mongoose.connect(dbUrl)
   .then(() => {
     console.log('connected');
   })
   .catch((err) => console.log(err));
+const store = new MongoDBStore({
+  url: dbUrl,
+  secret,
+  touchAfter: 24 * 60 * 60
+
+})
+
+store.on('error', function (e) {
+  console.log('Session store error', e)
+})
 
 const sessionConfig = {
-  secret: "thisshouldberealsecret",
+  store,
+  secret,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -42,6 +60,7 @@ app.use(session(sessionConfig));
 app.use(flash())
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(mongoSanitize());
 
 passport.use(new LocalStrategy(User.authenticate()))
 passport.serializeUser(User.serializeUser())
@@ -86,8 +105,7 @@ app.use((err, req, res, next) => {
 app.listen('8080', () => {
   console.log('running on port 8080 🙄');
 });
-// npm install cloudinary@1.41.3
 
-// npm install multer-storage-cloudinary@4.0.0
 
-// npm install multer@1.4.5-lts.1
+
+
