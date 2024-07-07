@@ -99,11 +99,11 @@ app.all('*', (req, res, next) => {
 app.use((err, req, res, next) => {
   const { message = "Something went wrong!", statusCode = 500 } = err;
   res.status(statusCode);
-  res.render('error', { err });
-});
 
-app.listen('8080', () => {
-  console.log('running on port 8080 🙄');
+});
+const port = process.env.PORT || 3000
+app.listen(port, () => {
+  console.log(`running on port ${port} 🙄`);
 });
 
 
